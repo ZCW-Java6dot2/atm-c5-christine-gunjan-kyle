@@ -6,7 +6,7 @@ public class Menu {
 
     public int userManagerMenu(){
         System.out.println("Please select from these options:  ");
-        //list with options?
+        //calls methods in UserManager
         return choice;
     }
 
