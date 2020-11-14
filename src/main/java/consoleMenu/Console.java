@@ -35,6 +35,12 @@ public class Console {
         }
     }
 
+    public void logIn(){
+        username = getStringInput("Please enter your username:  ");
+        pin = getStringInput("Please enter your pin:  ");
+        //call function from UserManager and pass these as parameters.
+    }
+
     public void newBankUser(){
         username = getStringInput("Please enter your preferred username:  ");
         while (username.equals("already existing username")){
@@ -45,12 +51,6 @@ public class Console {
         getStringInput("Your temporary pin is 1234. Press any key to change it.");
         //call method to make user type in 1234 and change PW?
         //then call method from User with account add options?
-    }
-
-    public void logIn(){
-        username = getStringInput("Please enter your username:  ");
-        pin = getStringInput("Please enter your pin:  ");
-        //call function from UserManager and pass these as parameters.
     }
 
     public int userManagerMenu(){
