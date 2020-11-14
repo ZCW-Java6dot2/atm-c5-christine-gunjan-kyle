@@ -50,7 +50,6 @@ public class Console {
             System.out.println("Apologies - this username is taken. Pick another.  ");
             username = getStringInput("Please enter your preferred username:  ");
         }
-        //create new user with initial 1234 pin (UserManager?)
         getStringInput("Your temporary pin is 1234. Press any key to change it.");
         //call changePin() method in UserManager
         //then call Main.userMenu() for account editing options
