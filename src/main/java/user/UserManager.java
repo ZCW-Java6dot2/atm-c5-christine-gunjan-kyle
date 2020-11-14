@@ -26,7 +26,9 @@ public class UserManager {
         //matches username/pin at login(called from Console)
         //if match, redirects to Menu.userMenu
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet()) {
-            if (keyValue.getKey().toUpperCase().equals(userName) && keyValue.getValue() == passCode) {
+            String receivedName=keyValue.getKey().toUpperCase();
+            Integer receivedPassCode=keyValue.getValue();
+            if (receivedName.equals(userName.toUpperCase()) && receivedPassCode== passCode) {
                 return true;
             }
          }
