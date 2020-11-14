@@ -18,7 +18,6 @@ public class UserManager {
         this.userPassword = userPassword;
 
     }
-
     //storage for all usernames and pin number
     int savedPin = 1234;//autoset new user pin equal to 1234?
 
