@@ -16,4 +16,7 @@ public class Menu {
         //calls methods in User, Account, Checking, Savings, Investment
         return choice;
     }
+
+    //Maybe should move ^these over to console.
+    //Then, when int choice returned from console, it is matched to its method here.
 }
