@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Account {
+
+
+    private String accountNumber;
+    private Integer accountType;
+
     private Double balance;
     private String accountId;
 
@@ -17,5 +22,6 @@ public class Account {
         return balance;
     }
     public void setBalance(Double balance) { this.balance = balance; }
+
 
 }
