@@ -44,7 +44,7 @@ public class Console {
     public void newBankUser(){
         username = getStringInput("Please enter your preferred username:  ");
         while (username.equals("already existing username")){
-            //^^must compare username to our list of usernames in use
+            //^^must compare username to list of usernames in UserManager
             System.out.println("Apologies - this username is taken. Pick another.  ");
             username = getStringInput("Please enter your preferred username:  ");
         }
