@@ -1,5 +1,9 @@
 package consoleMenu;
 
+
+import user.UserManager;
+
+
 import java.util.Scanner;
 
 public class Console {
@@ -23,10 +27,10 @@ public class Console {
         System.out.println("****************************************");
         System.out.println("*****  Welcome to Gukych Bank ATM  *****");
         System.out.println("****************************************");
-        System.out.println("Press 1 to log in,");
-        choice = getIntInput("Press 2 to open a new bank account:  ");
+
+        choice = getIntInput("Press 1 to log in,\n Press 2 to open a new bank account:  ");
         //IT IS NOT CURRENTLY RECOGNIZING 1 OR 2
-        while ((choice != 1) || (choice != 2)) {
+        while ((choice != 1) && (choice != 2)) {
             System.out.println("Incorrect selection. Try again.");
             choice = getIntInput("Press 1 to log in. Press 2 to open a new bank account.");
         }
@@ -38,9 +42,22 @@ public class Console {
     }
 
     public void logInInput(){
+
+        Boolean userAvailable=false;
         username = getStringInput("Please enter your username:  ");
         pin = getIntInput("Please enter your pin:  ");
         //call function from UserMenu and pass these as parameters.
+        UserManager userManager=new UserManager();
+        userAvailable= userManager.login(username,pin);
+        if(userAvailable)
+        {
+            //display menu to get account type
+        }
+        else
+        {
+            System.out.println("Incorrect selection. Try again.");
+            welcome();
+        }
     }
 
     public void newBankUser(){
