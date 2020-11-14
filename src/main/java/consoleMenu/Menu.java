@@ -56,7 +56,10 @@ public class Menu {
         System.out.println("Please select from these options:  ");
         System.out.println("1.  Add account");
         System.out.println("2.  Get account balance");
-        System.out.println("10.  Go to Previous Menu");
+        System.out.println("3.  Make a withdraw");
+        System.out.println("4.  Make a deposit");
+        System.out.println("5.  Make an internal transfer");
+        System.out.println("X.  Go to Previous Menu");
         transactionChoice = console.getIntInput("Please select from these options: :  ");
         return transactionChoice;
     }
