@@ -30,7 +30,12 @@ public class User {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
-
+    public ArrayList<Account> getAccountsByUserName(String userName) {
+        if(this.userName.equals(userName))
+          return accounts;
+        else
+            return new ArrayList<Account>();
+    }
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }

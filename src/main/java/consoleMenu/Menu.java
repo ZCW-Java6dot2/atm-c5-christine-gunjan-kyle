@@ -2,6 +2,7 @@ package consoleMenu;
 
 
 import user.UserManager;
+import consoleMenu.Console;
 
 public class Menu {
     UserManager manager = new UserManager();
@@ -46,5 +47,16 @@ public class Menu {
             case 7:
                 break;
         }
+    }
+
+    public Integer transactionMenu()
+    {
+        Integer transactionChoice=0;
+        Console console = new Console();
+        System.out.println("Please select from these options:  ");
+        System.out.println("1.  Add account");
+        System.out.println("2.  Get account balance");
+        transactionChoice = console.getIntInput("Please select from these options: :  ");
+        return transactionChoice;
     }
 }

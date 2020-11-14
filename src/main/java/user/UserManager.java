@@ -27,7 +27,7 @@ public class UserManager {
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet()) {
             String receivedName=keyValue.getKey().toUpperCase();
             Integer receivedPassCode=keyValue.getValue();
-            if (receivedName.equals(userName.toUpperCase()) && receivedPassCode== passCode) {
+            if (receivedName.equals(userName.toUpperCase()) && receivedPassCode.equals(passCode)) {
                 return true;
             }
          }

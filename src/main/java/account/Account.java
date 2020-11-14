@@ -1,17 +1,27 @@
 package account;
 
-public class Account {
+import java.util.ArrayList;
 
+public class Account extends ArrayList<Account> {
+    public String getAccountType() {
+        return accountType;
+    }
 
-    private String accountNumber;
-    private Integer accountType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
+    private String accountType;
     private Double balance;
     private String accountId;
+   public Account()
+   {
 
-    public Account(String accountId, Double balance) {
+   }
+    public Account(String accountId, Double balance,String accountType) {
         this.accountId = accountId;
         this.balance = balance;
+        this.accountType=accountType;
     }
     public String getAccountId() { return  accountId; }
     public void setAccountId(String accountId) { this.accountId = accountId; }
