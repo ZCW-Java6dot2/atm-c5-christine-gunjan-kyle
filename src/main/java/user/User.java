@@ -3,11 +3,6 @@ import account.*;
 import java.util.ArrayList;
 
 
-//create new accounts - interact with UserManager hashmap
-//auto set new user pin to 1234
-//getPin
-//setPin
-
 
 public class User {
     private String userName;
@@ -35,9 +30,24 @@ public class User {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
-
+    public ArrayList<Account> getAccountsByUserName(String userName) {
+        if(this.userName.equals(userName))
+          return accounts;
+        else
+            return new ArrayList<Account>();
+    }
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
+
+ public String getUserNameByAccount(String accountId)
+ {
+     for (int i = 0; i < accounts.size() ; i++) {
+         if(accounts.get(i).getAccountId().equals(accountId))
+             return userName;
+
+     }
+     return "";
+ }
 
 }
