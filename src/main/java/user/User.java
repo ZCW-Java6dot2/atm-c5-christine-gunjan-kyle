@@ -40,6 +40,14 @@ public class User {
         this.accounts = accounts;
     }
 
+ public String getUserNameByAccount(String accountId)
+ {
+     for (int i = 0; i < accounts.size() ; i++) {
+         if(accounts.get(i).getAccountId().equals(accountId))
+             return userName;
 
+     }
+     return "";
+ }
 
 }

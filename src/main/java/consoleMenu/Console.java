@@ -74,7 +74,7 @@ public class Console {
                    if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
                      accountIdToPass=accountsOfUser.get(i).getAccountId();
                 }
-               accountManager.menuOfTransactions(accountIdToPass);
+               accountManager.menuForTransactions(accountIdToPass);
 
            }
         }

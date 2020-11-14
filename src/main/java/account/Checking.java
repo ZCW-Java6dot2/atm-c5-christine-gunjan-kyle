@@ -6,4 +6,14 @@ public class Checking extends Account {
         super(accountId, balance,accountType);
     }
 
+    public Checking() {
+
+    }
+
+    public Double getBalance() {
+        return super.getBalance();
+    }
+
+
+
 }

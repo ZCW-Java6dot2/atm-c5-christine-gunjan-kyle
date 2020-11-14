@@ -3,6 +3,11 @@ package account;
 import java.util.ArrayList;
 
 public class Account extends ArrayList<Account> {
+
+    private String accountType;
+    private Double balance;
+    private String accountId;
+
     public String getAccountType() {
         return accountType;
     }
@@ -11,9 +16,7 @@ public class Account extends ArrayList<Account> {
         this.accountType = accountType;
     }
 
-    private String accountType;
-    private Double balance;
-    private String accountId;
+
    public Account()
    {
 
