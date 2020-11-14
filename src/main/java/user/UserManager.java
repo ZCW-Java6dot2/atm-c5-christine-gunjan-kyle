@@ -1,11 +1,25 @@
 package user;
 
+import consoleMenu.Console;
+
 public class UserManager {
-    //need to store all usernames and pin number
+    //where we will keep our 3 User objects that auto generate at begin?
 
-    //matches username/pin at login(called from Console) - if match, calls method from User or Account
+    //storage for all usernames and pin number
+    int savedPin = 1234;//autoset new user pin equal to 1234?
 
-    //where we will also keep our 3 User objects that auto generate at begin?
+    public void login(){
+        //matches username/pin at login(called from Console)
+        //if match, redirects to Menu.userMenu
+    }
 
-    //need method for user to change pin --accepts "1234" to change 1st-time user pin?
+    public void changePin(){
+        int pin = Console.getIntInput("Enter your current pin:  ");
+        while (pin != savedPin) {
+            pin = Console.getIntInput("WROOOONG! Try again:  ");
+        }
+        if (pin == savedPin){
+            savedPin = Console.getIntInput("Good job. Enter a new pin:  ");
+        }
+    }
 }
