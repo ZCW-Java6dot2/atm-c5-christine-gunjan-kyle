@@ -1,44 +1,37 @@
 package account;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
-public class Account {
-    private String accountNumber;
-    private Integer accountType;
-    private Integer balance;
+public class Account extends ArrayList<Account> {
 
-    public Account(String accountId, Integer accountType) {
-        this.accountNumber = accountNumber;
+    private String accountType;
+    private Double balance;
+    private String accountId;
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
-    public String getAccountNumber() { return  accountNumber; }
-    public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
-    public Integer getAccountType() { return accountType; }
-    public void setAccountType(Integer accountType) { this.accountType = accountType; }
 
-    public Integer balance() {
-//      return "Your balance is (String format account.balance)";
-        return null;
+
+   public Account()
+   {
+
+   }
+    public Account(String accountId, Double balance,String accountType) {
+        this.accountId = accountId;
+        this.balance = balance;
+        this.accountType=accountType;
     }
-    public void deposit(Integer amountDeposited) {
-//         amountDeposited + account.balance()
-//         return "Your new balance is (String format account.balance)"
-//
-//         add this action to print history
+    public String getAccountId() { return  accountId; }
+    public void setAccountId(String accountId) { this.accountId = accountId; }
+    public Double getBalance() {
+        return balance;
     }
-    public void withdraw(Integer amountWithdrawn) {
-//         account.balance() - amountWithdrawn
-//
-//         if amountWithdrawn > account.balance()
-//         return "You only have (String format account.balance) to withdraw"
-//
-//         add this action to the print history
-//         add amountWithdrawn to cash in printout
-
-    }
-
-
+    public void setBalance(Double balance) { this.balance = balance; }
 
 
 }
