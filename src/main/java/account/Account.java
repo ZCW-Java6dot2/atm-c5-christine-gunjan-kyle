@@ -4,24 +4,17 @@ import java.util.List;
 import java.util.Map;
 
 public class Account {
-
-
     private String accountNumber;
     private Integer accountType;
 
-    private Double balance;
-    private String accountId;
-
-    public Account(String accountId, Double balance) {
-        this.accountId = accountId;
-        this.balance = balance;
+    public Account(String accountId, Integer accountType) {
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
     }
-    public String getAccountId() { return  accountId; }
-    public void setAccountId(String accountId) { this.accountId = accountId; }
-    public Double getBalance() {
-        return balance;
-    }
-    public void setBalance(Double balance) { this.balance = balance; }
+    public String getAccountNumber() { return  accountNumber; }
+    public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
+    public Integer getAccountType() { return accountType; }
+    public void setAccountType(Integer accountType) { this.accountType = accountType; }
 
 
 }
