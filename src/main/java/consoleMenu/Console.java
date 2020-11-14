@@ -49,19 +49,7 @@ public class Console {
             username = getStringInput("Please enter your preferred username:  ");
         }
         getStringInput("Your temporary pin is 1234. Press any key to change it.");
-        //call method to make user type in 1234 and change PW?
-        //then call method from User with account add options?
-    }
-
-    public int userManagerMenu(){
-        System.out.println("Please select from these options:  ");
-        //list with options
-        return choice;
-    }
-
-    public int userAccountMenu(){
-        System.out.println("Please select from these options:  ");
-        //list with options
-        return choice;
+        //call method in UserManager: make user type in 1234 and change PW
+        //then call Main.userMenu() for account editing options
     }
 }
