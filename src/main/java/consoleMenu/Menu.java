@@ -7,6 +7,7 @@ public class Menu {
     public int userManagerMenu(){
         System.out.println("Please select from these options:  ");
         //calls methods in UserManager
+        //1. change pin
         return choice;
     }
 
