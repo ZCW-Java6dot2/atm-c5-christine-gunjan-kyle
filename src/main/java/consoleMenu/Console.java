@@ -23,7 +23,9 @@ public class Console {
         System.out.println("****************************************");
         System.out.println("*****  Welcome to Gukych Bank ATM  *****");
         System.out.println("****************************************");
-        choice = getIntInput("Press 1 to log in. Press 2 to open a new bank account.");
+        System.out.println("Press 1 to log in,");
+        choice = getIntInput("Press 2 to open a new bank account:  ");
+        //IT IS NOT CURRENTLY RECOGNIZING 1 OR 2
         while ((choice != 1) || (choice != 2)) {
             System.out.println("Incorrect selection. Try again.");
             choice = getIntInput("Press 1 to log in. Press 2 to open a new bank account.");
