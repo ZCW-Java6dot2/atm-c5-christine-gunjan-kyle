@@ -6,6 +6,9 @@ import account.AccountManager;
 import user.UserManager;
 import consoleMenu.Console;
 import user.User;
+
+import java.util.Random;
+
 public class Menu {
     AccountManager accountManager;
     UserManager manager;
@@ -68,6 +71,7 @@ public class Menu {
         this.currentUser = currentUser;
         int newPin = -1;
         Integer choiceOfAccount = 0;
+        Random random=new Random();
         System.out.println("**** ACCOUNT OPTIONS *****  ");
         System.out.println("1.  Checking");
         System.out.println("2.  Savings");
@@ -89,6 +93,7 @@ public class Menu {
             case 3:
                 return "INVESTMENT";
             case 4:
+                accountId+=random.nextInt(998)+1;
                 balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
                 accountType = Console.getStringInput("Enter account type CHECKING/SAVINGS/INVESTMENT:  ");
                 currentUser.setAccounts(new Account(String.valueOf(accountId++),balcanceNewAccount,accountType));
@@ -96,6 +101,7 @@ public class Menu {
             case 5:
                 return "";
             case 6:
+
                 newPin = Console.getIntInput("Please enter the new pin : ");
                 manager.changePin(currentUser.getUserName(), newPin);
                 //userOptionsMenu(currentUser);
