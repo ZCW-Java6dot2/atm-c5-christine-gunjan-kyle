@@ -7,6 +7,7 @@ import user.UserManager;
 import consoleMenu.Console;
 import user.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,7 +28,7 @@ public class Menu {
 
     }
 
-    public void accountMenu(Account account) {
+    public void accountMenu(Account account) throws IOException {
         this.currentAccount = account;
         int transactionChoice = 0;
         this.accountId = accountId;
@@ -44,7 +45,7 @@ public class Menu {
         matchTransactionMethod(transactionChoice);
     }
 
-    public void matchTransactionMethod(int choice) {
+    public void matchTransactionMethod(int choice) throws IOException {
         Random random = new Random();
         Double balcanceNewAccount = 0d;
         String accountType = "";
@@ -69,6 +70,7 @@ public class Menu {
                 break;
             case 2:
                 System.out.println(currentAccount.getBalance());
+                accountMenu(currentAccount);
                 break;
             case 3:
                 Double withdrawAmount = 0.0;
@@ -103,6 +105,11 @@ public class Menu {
                     currentAccount.withdraw(currentAccount.getBalance());
                 }
                 currentUser.removeAccount(currentAccount.getAccountId());
+                try {
+                    userOptionsMenu(currentUser);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 7:
                 userOptionsMenu(currentUser);
@@ -115,11 +122,12 @@ public class Menu {
         }
     }
 
-    public String userOptionsMenu(User currentUser) {
+    public void userOptionsMenu(User currentUser) throws IOException {
         this.currentUser = currentUser;
         int newPin = -1;
         Integer choiceOfAccount = 0;
-
+        Account accountSelected = new Account();
+        String accountTypeSelected="";
         System.out.println("**** ACCOUNT OPTIONS *****  ");
         System.out.println("1.  Checking");
         System.out.println("2.  Savings");
@@ -132,28 +140,62 @@ public class Menu {
         switch (choiceOfAccount) {
 
             case 1:
-                return "CHECKING";
+                 accountTypeSelected="CHECKING";
+                //Account accountSelected = new Account();
+
+                for(int i=0;i<currentUser.getAccounts().size();i++) {
+                    if(currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected))
+                        accountSelected=currentUser.getAccounts().get(i);
+                }
+                //For the selected account , display menu to do transaction
+                this.accountMenu(accountSelected);
+                //return "CHECKING";
+
             case 2:
-                return "SAVINGS";
+                 accountTypeSelected="SAVINGS";
+                 accountSelected = new Account();
+
+                for(int i=0;i<currentUser.getAccounts().size();i++) {
+                    if(currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected))
+                        accountSelected=currentUser.getAccounts().get(i);
+                }
+                //For the selected account , display menu to do transaction
+                this.accountMenu(accountSelected);
+
+               // return "SAVINGS";
             case 3:
-                return "INVESTMENT";
+                accountTypeSelected="INVESTMENT";
+                accountSelected = new Account();
+
+                for(int i=0;i<currentUser.getAccounts().size();i++) {
+                    if(currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected))
+                        accountSelected=currentUser.getAccounts().get(i);
+                }
+                //For the selected account , display menu to do transaction
+                this.accountMenu(accountSelected);
+
+                //return "INVESTMENT";
             case 4:
                 this.matchTransactionMethod(1);
-                return "";
+               // return "";
             case 5:
 
                 newPin = Console.getIntInput("Please enter the new pin:  ");
                 manager.changePin(currentUser.getUserName(), newPin);
-                return "";
+               // return "";
             case 6:
+
+                 manager.printOnFile();
                 //log out method
                 //prompt to log in again or quit atm
+
+
                 break;
 
             default:
-                return ("Invalid entry");
+                System.out.println("Invalid entry");
         }
-        return "";
+      //  return "";
     }
 }
 
