@@ -51,6 +51,21 @@ public class AccountTest {
     }
 
     @Test
+    public void doesUserExistTest() {
+        UserManager manager = new UserManager();
+        boolean expected = true;
+        boolean actual = manager.doesUserExist("GUNJAN");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getUserTest() {
+        UserManager manager = new UserManager();
+        User actual = manager.getUser("KYLE");
+        assertNotNull(actual);
+    }
+
+    @Test
     public void transferTest() {
         Console console = mock(Console.class);
         when(console.getDoubleInput("prompt")).thenReturn(150d);
@@ -82,23 +97,10 @@ public class AccountTest {
 //        assertEquals(100.0, actual, 0.0001);
     }
 
-    @Test
-    public void doesUserExistTest() {
-        UserManager manager = new UserManager();
-        boolean expected = true;
-        boolean actual = manager.doesUserExist("GUNJAN");
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getUserTest() {
-        UserManager manager = new UserManager();
-        User actual = manager.getUser("KYLE");
-        assertNotNull(actual);
-    }
 
     @Test
     public void loginTest() {
+
 //        Account a = new Account(10.0);
 //        Account b = new Account(0.0);
 //        a.transfer(b, 100.0); // nothing should happen
@@ -107,6 +109,9 @@ public class AccountTest {
     }
     @Test
     public void changePinTest() {
+        Console console = mock(Console.class);
+        when(console.getDoubleInput("prompt")).thenReturn(150d);
+
 //        Account a = new Account(10.0);
 //        Account b = new Account(0.0);
 //        a.transfer(b, 100.0); // nothing should happen
