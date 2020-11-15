@@ -9,6 +9,7 @@ import user.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Menu {
@@ -94,43 +95,27 @@ public class Menu {
             case 5:
                 Double transferAmount = 0.0;
                 transferAmount = Console.getDoubleInput("Please enter the amount : ");
-                currentAccount.withdraw(transferAmount);
                 Integer choices = 0;
                 System.out.println("1.  Checking");
                 System.out.println("2.  Savings");
                 System.out.println("3.  Investment");
                 choices = Console.getIntInput("Please select from these options:  ");
                 String accountTypeSelected = "";
-                switch (choices) {
-                    case 1:
-                        accountTypeSelected = "CHECKING";
-                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
-                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
-                                currentUser.getAccounts().get(i).deposit(transferAmount);
-                                currentAccount = currentUser.getAccounts().get(i);
-                            }
-                        }
-                        break;
-                    case 2:
-                        accountTypeSelected = "SAVINGS";
-                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
-                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
-                                currentUser.getAccounts().get(i).deposit(transferAmount);
-                                currentAccount = currentUser.getAccounts().get(i);
-                            }
-                        }
-                        break;
-                    // return "SAVINGS";
-                    case 3:
-                        accountTypeSelected = "INVESTMENT";
-
-                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
-                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
-                                currentUser.getAccounts().get(i).deposit(transferAmount);
-                                currentAccount = currentUser.getAccounts().get(i);
-                            }
-                        }
-                        break;
+                HashMap<Integer, String> accTypeMap = new HashMap<>();
+                accTypeMap.put(1,"CHECKING");
+                accTypeMap.put(2,"SAVINGS");
+                accTypeMap.put(3,"INVESTMENT");
+                String destinationAccType = accTypeMap.get(choices);
+                Account destinationAccount = null;
+                for (int i = 0; i < currentUser.getAccounts().size(); i++) {
+                    if (currentUser.getAccounts().get(i).getAccountType().equals(destinationAccType)) {
+                        destinationAccount = currentUser.getAccounts().get(i);
+                    }
+                }
+                User.transfer(currentAccount, destinationAccount, transferAmount);
+                if (destinationAccount == null){
+                    System.out.println("This account doesn't exist.");
+                    accountMenu(currentAccount);
                 }
                 break;
             case 6:

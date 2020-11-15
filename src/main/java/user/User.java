@@ -53,6 +53,13 @@ public class User {
         }
     }
 
+    public static void transfer(Account currentAccount, Account destinationAccount, Double transferAmount){
+        //safety checks - does current account have enough money? else throw error
+        //current account != dest or throw error
+        currentAccount.withdraw(transferAmount);
+        destinationAccount.deposit(transferAmount);
+    }
+
  public String getUserNameByAccount(String accountId)
  {
      for (int i = 0; i < accounts.size() ; i++) {
