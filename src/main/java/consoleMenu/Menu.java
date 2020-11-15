@@ -22,6 +22,9 @@ public class Menu {
         this.manager = manager;
         this.accountManager = accountManager;
     }
+    public Menu() {
+
+    }
 
     public void accountMenu(Account account)
     {
@@ -40,7 +43,7 @@ public class Menu {
         matchTransactionMethod(transactionChoice);
     }
 
-    private void matchTransactionMethod(int choice){
+    public void matchTransactionMethod(int choice){
         Random random=new Random();
         Double balcanceNewAccount=0d;
         String accountType = "";
@@ -68,16 +71,23 @@ public class Menu {
                 System.out.println(currentAccount.getBalance());
                 break;
             case 3:
-                //withdrawal
+                Double withdrawAmount = 0.0;
+                withdrawAmount = Console.getDoubleInput("Please enter the amount :  ");
+                currentAccount.withdraw(withdrawAmount);
+                System.out.println(currentAccount.getBalance());
+                accountMenu(currentAccount);
                 break;
             case 4:
-                //deposit
+                Double depositAmount = 0.0;
+                depositAmount = Console.getDoubleInput("Please enter the amount :  ");
+                currentAccount.deposit(depositAmount);
+                accountMenu(currentAccount);
                 break;
             case 5:
                 //internal transfer
                 break;
             case 6:
-                //previous menu
+                userOptionsMenu(currentUser);
                 break;
             default:
                 System.out.println("Invalid entry");
@@ -117,12 +127,12 @@ public class Menu {
 
                 newPin = Console.getIntInput("Please enter the new pin : ");
                 manager.changePin(currentUser.getUserName(), newPin);
-                //userOptionsMenu(currentUser);
                 return "";
-                //break;
+
             default:
-                return("Invalid entry");
+                return ("Invalid entry");
+            }
         }
 
     }
-}
+
