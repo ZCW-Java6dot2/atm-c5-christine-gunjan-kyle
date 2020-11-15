@@ -51,10 +51,11 @@ public class Account extends ArrayList<Account> {
            setBalance(getBalance() - transferAmount);
            System.out.println("Your remaining balance is" + getBalance() + ".\n" +
                    "You transfer was successful");
-       }else
+       }else{
            System.out.println("I know you owe them money but money doesn't grow on trees your current " +
                    "balance is too low to transfer that much. You have" + getBalance() + "available try again.");
        }
     }
+}
 
 
