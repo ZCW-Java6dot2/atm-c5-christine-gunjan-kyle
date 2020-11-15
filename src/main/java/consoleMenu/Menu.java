@@ -39,8 +39,9 @@ public class Menu {
         System.out.println("3.  Make withdrawal");
         System.out.println("4.  Make deposit");
         System.out.println("5.  Transfer");
-        System.out.println("6.  Close Account");
-        System.out.println("7.  Go to Previous Menu");
+        System.out.println("6.  Print History");
+        System.out.println("7.  Close Account");
+        System.out.println("8.  Go to Previous Menu");
         System.out.println("****************************");
         transactionChoice = Console.getIntInput("Please select from these options: :  ");
         matchTransactionMethod(transactionChoice);
@@ -90,27 +91,49 @@ public class Menu {
                 Double transferAmount = 0.0;
                 transferAmount = Console.getDoubleInput("Please enter the amount : ");
                 currentAccount.withdraw(transferAmount);
-                // this needs to be a new menu just with their current accounts.
-//                    Integer choiceOfAccount = 0;
-//                System.out.println("1.  Checking");
-//                System.out.println("2.  Savings");
-//                System.out.println("3.  Investment");
-//                choiceOfAccount = Console.getIntInput("Please select from these options:  ");
-//                switch (currentAccount) {
-//                    case 1:
-//                        return currentAccount.deposit(transferAmount);
-//                        accountMenu(currentAccount);
-//                    case 2:
-//                        return currentAccount.deposit(transferAmount);
-//                        accountMenu(currentAccount);
-//                    case 3:
-//                        return currentAccount.deposit(transferAmount);
-//                        accountMenu(currentAccount);
-//                        break;
-//                      default:
-//                        return ("Invalid entry");
+                Integer choices = 0;
+                System.out.println("1.  Checking");
+                System.out.println("2.  Savings");
+                System.out.println("3.  Investment");
+                choices = Console.getIntInput("Please select from these options:  ");
+                String accountTypeSelected = "";
+                switch (choices) {
+                    case 1:
+                        accountTypeSelected = "CHECKING";
+                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
+                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
+                                currentUser.getAccounts().get(i).deposit(transferAmount);
+                                currentAccount = currentUser.getAccounts().get(i);
+                            }
+                        }
+                        break;
+                    case 2:
+                        accountTypeSelected = "SAVINGS";
+                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
+                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
+                                currentUser.getAccounts().get(i).deposit(transferAmount);
+                                currentAccount = currentUser.getAccounts().get(i);
+                            }
+                        }
+                        break;
+            // return "SAVINGS";
+                    case 3:
+                        accountTypeSelected = "INVESTMENT";
+
+                        for (int i = 0; i < currentUser.getAccounts().size(); i++) {
+                            if (currentUser.getAccounts().get(i).getAccountType().equals(accountTypeSelected)) {
+                                currentUser.getAccounts().get(i).deposit(transferAmount);
+                                currentAccount = currentUser.getAccounts().get(i);
+                            }
+                        }
+                        break;
+                }
                 break;
             case 6:
+                currentAccount.printHistory();
+                accountMenu(currentAccount);
+                break;
+            case 7:
                 if (currentAccount.getBalance() > 0.0) {
                     currentAccount.withdraw(currentAccount.getBalance());
                 }
@@ -121,7 +144,7 @@ public class Menu {
                     e.printStackTrace();
                 }
                 break;
-            case 7:
+            case 8:
                 userOptionsMenu(currentUser);
                 break;
             default:
