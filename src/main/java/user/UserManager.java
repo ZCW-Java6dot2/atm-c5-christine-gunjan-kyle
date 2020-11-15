@@ -136,6 +136,30 @@ public class UserManager {
         writer.flush();
         writer.close();
     }
+    public void loadUserAccountsData(){
+        // (1)
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
+        String line = "";
+        String csvSplitBy = ",";
 
+        ArrayList<User> users;
+        // (2)
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            // nextId = (int)Integer.parseInt(br.readLine());
+
+            while ((line = br.readLine()) != null) {
+                // split line with comma
+                String[] beer = line.split(csvSplitBy);
+
+                // (4)
+                String userName = beer[0];
+                Integer passCode = Integer.parseInt(beer[1]);
+                // (5)
+                this.userPassword.put(userName,passCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
