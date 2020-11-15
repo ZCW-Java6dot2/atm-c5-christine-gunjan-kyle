@@ -25,10 +25,9 @@ public class UserManager {
         this.loadUserPassCodeData();
       users = new ArrayList<User>();
         Account account1 = new Account("001", 18000d, "CHECKING");
-        Account account2 = new Account("002", 1500d, "SAVINGS");
-       ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
+        ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
         gunjansAccounts.add(account1);
-        gunjansAccounts.add(account2);
+        //gunjansAccounts.add(account2);
       //  gunjansAccounts.add(account3);
         users.add(new User("GUNJAN", gunjansAccounts));
         this.loadUserAccountsData();
