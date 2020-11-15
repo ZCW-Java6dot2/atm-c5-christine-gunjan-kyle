@@ -12,9 +12,7 @@ public class Account extends ArrayList<Account> {
 
 
 
-   public Account()
-   {
-
+   public Account() {
    }
     public Account(String accountId, Double balance,String accountType) {
         this.accountId = accountId;

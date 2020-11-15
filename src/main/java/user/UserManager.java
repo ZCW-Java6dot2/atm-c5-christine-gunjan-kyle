@@ -1,25 +1,48 @@
 package user;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import consoleMenu.Console;
+import account.Account;
 import java.util.HashMap;
 import java.util.*;
 public class UserManager {
-    //where we will keep our 3 User objects that auto generate at begin?
-    HashMap<String,Integer> userPassword;//= new HashMap<User,Integer>();
-    public UserManager()
-    {
+    //storage for all usernames and pin number
+    private static final int defaultPassword = 1234;
+    HashMap<String,Integer> userPassword; //= new HashMap<User,Integer>();
+    ArrayList<User> users;
+
+    public UserManager() {
         this.userPassword=new HashMap<String, Integer>();
         userPassword.put("GUNJAN",1255);
         userPassword.put("CHRISTINE",7784);
         userPassword.put("KYLE",9945);
+        users = new ArrayList<User>();
+        Account account1 = new Account("CH-gunjan001", 5000d, "CHECKING");
+        Account account2 = new Account("SA-gunjan002", 1500d, "SAVINGS");
+        Account account3 = new Account("IN-gunjan003", 150000d, "INVESTMENT");
+        ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
+        gunjansAccounts.add(account1);
+        gunjansAccounts.add(account2);
+        gunjansAccounts.add(account3);
+        users.add(new User("GUNJAN", gunjansAccounts));
     }
+
     public UserManager(HashMap<String, Integer> userPassword) {
-
         this.userPassword = userPassword;
-
     }
-    //storage for all usernames and pin number
-    int savedPin = 1234;//autoset new user pin equal to 1234?
+
+    public Boolean doesUserExist(String name){
+        return userPassword.containsKey(name);
+    }
+
+    public User getUser(String name) {
+        for (User user : users) {
+            if (name.equalsIgnoreCase(user.getUserName())) {
+                return user;
+            }
+        }
+        return null;
+    }
 
     public Boolean login(String userName , Integer passCode) {
         //matches username/pin at login(called from Console)
@@ -34,13 +57,14 @@ public class UserManager {
         return false;
     }
 
-    public void changePin(){
-        int pin = Console.getIntInput("Enter your current pin:  ");
-        while (pin != savedPin) {
-            pin = Console.getIntInput("WROOOONG! Try again:  ");
-        }
-        if (pin == savedPin){
-            savedPin = Console.getIntInput("Good job. Enter a new pin:  ");
-        }
+    public void changePin(String name, int pin){
+        this.userPassword.replace(name, pin);
+        System.out.println("Pin successfully changed.");
+    }
+
+    public void createUser(String name){
+        this.userPassword.put(name, defaultPassword);
+
+        this.users.add(new User(name, new ArrayList<Account>()));
     }
 }
