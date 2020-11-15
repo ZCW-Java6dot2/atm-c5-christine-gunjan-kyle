@@ -71,7 +71,11 @@ public class Menu {
 
                 break;
             case 2:
-                System.out.println(currentAccount.getBalance());
+                if (currentAccount.getBalance() != null){
+                    System.out.println(currentAccount.getBalance());
+                } else {
+                    System.out.println("You don't have this account! Go make one, cheapo.");
+                }
                 accountMenu(currentAccount);
                 break;
             case 3:
