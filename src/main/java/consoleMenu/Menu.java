@@ -135,7 +135,10 @@ public class Menu {
                 break;
             case 7:
                 if (currentAccount.getBalance() > 0.0) {
-                    currentAccount.withdraw(currentAccount.getBalance());
+                    Double moneyAmount = currentAccount.getBalance();
+                    currentAccount.withdraw(moneyAmount);
+                    System.out.println("Successful withdrawal of " + moneyAmount + " from " + currentAccount.getAccountId());
+                    System.out.println(currentAccount.getAccountId() + " successfully emptied and closed.");
                 }
                 currentUser.removeAccount(currentAccount.getAccountId());
                 try {
