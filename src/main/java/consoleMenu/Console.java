@@ -20,7 +20,7 @@ public class Console {
     Menu menu;
     Boolean userAvailable;
     String accountTypeSelected = "";
-    String accountIdToPass = "";
+   // String accountIdToPass = "";
     User currentUser;
 
     public Console(){
@@ -37,8 +37,6 @@ public class Console {
     }
 
     public static int getIntInput(String prompt) {
-        //System.out.print(prompt);
-        //return scan.nextInt();
         Console console = new Console();
         Integer userInput = 0;
         System.out.println(prompt);
@@ -52,7 +50,31 @@ public class Console {
 
     }
 
+    public static Double getDoubleInput(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+
+        Double userInputDouble = 0D;
+        System.out.println(prompt);
+
+        if (scanner.hasNextDouble()) {
+            userInputDouble = scanner.nextDouble();
+        } else
+        {
+            userInputDouble = Console.getDoubleInput ("Not a Number value, Please re-enter:");
+
+        }
+
+        return userInputDouble;
+    }
+
+
     public void welcome(){
+        System.out.println("\n  vVVVv (___) wWWWw         (___)  vVVVv\n" +
+                "  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)\n" +
+                "   ~Y~   \\|    ~Y~   (___)    |/    ~Y~\n" +
+                "   \\|   \\ |/   \\| /  \\~Y~/   \\|    \\ |/\n" +
+                "  \\\\|// \\\\|// \\\\|/// \\\\|//  \\\\|// \\\\\\|///\n" +
+                "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("****************************************");
         System.out.println("*****  Welcome to Gukych Bank ATM  *****");
         System.out.println("****************************************");
@@ -77,18 +99,20 @@ public class Console {
 
         if(userAvailable) {
             currentUser = userManager.getUser(username);
-            //String nameOfUser = user.getUserNameByAccount(accountIdSelected);
-            //ArrayList<Account> accountsOfUser = accountManager.getAccounts(nameOfUser);
             ArrayList<Account> accountsOfUser= currentUser.getAccounts();
-           if(accountsOfUser.size() != 3) {
-               //Will go through loop to see how it filters the account type
+           if(accountsOfUser.size()==0) {
+
+               //Add an account
            } else {
+               //get all accounts belonging to this user
                Account accountSelected = new Account();
+               //Display menu for user to select the account types.
                accountTypeSelected = menu.userOptionsMenu(currentUser);
              for(int i=0;i<accountsOfUser.size();i++) {
                    if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
                      accountSelected=accountsOfUser.get(i);
                 }
+               //For the selected account , display menu to do transaction
                menu.accountMenu(accountSelected);
            }
         } else {
@@ -105,8 +129,10 @@ public class Console {
             username = getStringInput("Please enter your preferred username:  ");
             userTaken = userManager.doesUserExist(username);
         }
-        getIntInput("Your temporary pin is 1234. To change, enter your new pin.");
-        userManager.changePin(username, 1234);
+       int newPin= getIntInput("Your temporary pin is 1234. To change, enter your new pin:");
+
+        userManager.changePin(username, newPin);
+        currentUser = userManager.getUser(username);
         menu.userOptionsMenu(currentUser);
     }
 
