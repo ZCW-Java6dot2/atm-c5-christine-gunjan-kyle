@@ -1,7 +1,6 @@
 package account;
 
 import consoleMenu.Console;
-import consoleMenu.Menu;
 import user.UserManager;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Account extends ArrayList<Account> {
     private Double depositAmount;
     private Double withdrawAmount;
     private Double transferAmount;
-    Menu menu = new Menu();
+
 
    public Account() {
    }
@@ -34,7 +33,7 @@ public class Account extends ArrayList<Account> {
 
     public void deposit(Double depositAmount) {
         setBalance(balance + depositAmount);
-        System.out.println("You're new balance is" + balance);
+        System.out.println("You're new balance is " + balance);
     }
     public double withdraw(Double withdrawAmount) {
        Double newWithdrawAmount = withdrawAmount;
@@ -46,14 +45,17 @@ public class Account extends ArrayList<Account> {
         System.out.println("Your remaining balance is " + getBalance());
         return getBalance();
     }
-    public void transfer(Double transferAmount) {
-       if(transferAmount <= getBalance()) {
+    public void transfer(Double transferAmount, Account transfereeAccount) {
+        Double newTransferAmount = transferAmount;
+       while(transferAmount > getBalance()) {
+           System.out.println("I know you owe them money but money doesn't grow on trees your current balance is too low\n" +
+                   "to transfer that much. You have " + getBalance() + " available try again.");
+           newTransferAmount = Console.getDoubleInput("Please enter the amount :  ");
+       }
            setBalance(getBalance() - transferAmount);
-           System.out.println("Your remaining balance is" + getBalance() + ".\n" +
-                   "You transfer was successful");
-       }else
-           System.out.println("I know you owe them money but money doesn't grow on trees your current " +
-                   "balance is too low to transfer that much. You have" + getBalance() + "available try again.");
+        System.out.println("Your remaining balance is " + getBalance() + ".\n" +
+                "Which account would you like to deposit this money into?");
+
        }
     }
 

@@ -84,7 +84,19 @@ public class Menu {
                 accountMenu(currentAccount);
                 break;
             case 5:
-                //internal transfer
+                Double transferAmount = 0.0;
+                transferAmount = Console.getDoubleInput("Please enter the amount : ");
+                currentAccount.withdraw(transferAmount);
+                // this needs to be a new menu just with their current accounts.
+//                switch (currentAccount) {
+//                    Integer choiceOfAccount = 0;
+//                    case 1:
+//                        return currentAccount.deposit(transferAmount);
+//                    case 2:
+//                        return currentAccount.deposit(transferAmount);
+//                    case 3:
+//                        return currentAccount.deposit(transferAmount);
+//                        break;
                 break;
             case 6:
                 userOptionsMenu(currentUser);
