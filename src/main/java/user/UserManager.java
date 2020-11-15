@@ -99,7 +99,7 @@ public class UserManager {
     public void loadUserPassCodeData(){
         // (1)
 
-        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+        String csvFile = "/Users/kyle/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
 
         String line = "";
         String csvSplitBy = ",";
@@ -124,7 +124,7 @@ public class UserManager {
         }
     }
     public void printOnFile() throws IOException {
-        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+        String csvFile = "/Users/kyle/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
         FileWriter writer = new FileWriter(csvFile); //(1)
        // CSVUtils.writeLine(writer,new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));  // (2)
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet())
@@ -140,7 +140,7 @@ public class UserManager {
     }
     public void loadUserAccountsData(){
         // (1)
-        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
+        String csvFile = "/Users/kyle/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
         String line = "";
         String csvSplitBy = ",";
 
