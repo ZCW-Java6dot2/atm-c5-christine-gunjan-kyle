@@ -18,6 +18,7 @@ public class Menu {
     private String accountId = "";
     User currentUser;
     Account currentAccount;
+    Console console;
 
     public Menu(UserManager manager, AccountManager accountManager) {
         this.manager = manager;
@@ -90,15 +91,24 @@ public class Menu {
                 transferAmount = Console.getDoubleInput("Please enter the amount : ");
                 currentAccount.withdraw(transferAmount);
                 // this needs to be a new menu just with their current accounts.
-//                switch (currentAccount) {
 //                    Integer choiceOfAccount = 0;
+//                System.out.println("1.  Checking");
+//                System.out.println("2.  Savings");
+//                System.out.println("3.  Investment");
+//                choiceOfAccount = Console.getIntInput("Please select from these options:  ");
+//                switch (currentAccount) {
 //                    case 1:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                    case 2:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                    case 3:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                        break;
+//                      default:
+//                        return ("Invalid entry");
                 break;
             case 6:
                 if (currentAccount.getBalance() > 0.0) {
@@ -135,6 +145,7 @@ public class Menu {
         System.out.println("4.  Add new account");
         System.out.println("5.  Change pin");
         System.out.println("6.  Log out of user");
+        System.out.println("7.  Quit ATM");
         choiceOfAccount = Console.getIntInput("Please select from these options:  ");
 
         switch (choiceOfAccount) {
@@ -185,13 +196,17 @@ public class Menu {
                // return "";
             case 6:
 
-                 manager.printOnFile();
-                //log out method
-                //prompt to log in again or quit atm
-
+                //print transaction history
+                manager.printOnFile();
+                console = new Console();
+                console.welcome();
+                break;
+            case 7:
+                System.out.print("Quiting the calculator, Program Ending");
+                //print transaction history
+                System.exit(0);
 
                 break;
-
             default:
                 System.out.println("Invalid entry");
         }

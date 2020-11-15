@@ -13,6 +13,8 @@ public class Account extends ArrayList<Account> {
     private Double depositAmount;
     private Double withdrawAmount;
     private Double transferAmount;
+    // correct me if this is wrong on print history
+    private ArrayList<String> printHistory;
 
 
    public Account() {
@@ -32,8 +34,9 @@ public class Account extends ArrayList<Account> {
     public void setAccountType(String accountType) { this.accountType = accountType; }
 
     public void deposit(Double depositAmount) {
-        setBalance(balance + depositAmount);
-        System.out.println("You're new balance is " + balance);
+           setBalance(balance + depositAmount);
+           System.out.println("You're new balance is " + balance);
+           printHistory.add("Deposit " + depositAmount.toString() + "Balance " + balance.toString()+ "\n");
     }
     public double withdraw(Double withdrawAmount) {
        Double newWithdrawAmount = withdrawAmount;
@@ -42,10 +45,11 @@ public class Account extends ArrayList<Account> {
            newWithdrawAmount = Console.getDoubleInput("Please enter the amount :  ");
        }
        setBalance(getBalance() - newWithdrawAmount);
-        System.out.println("Your remaining balance is " + getBalance());
+           System.out.println("Your remaining balance is " + getBalance());
+           printHistory.add("Withdraw " +withdrawAmount.toString() + "Balance:" + balance.toString()+ "\n");
         return getBalance();
     }
-    public void transfer(Double transferAmount, Account transfereeAccount) {
+    public void transfer(Double transferAmount) {
         Double newTransferAmount = transferAmount;
        while(transferAmount > getBalance()) {
            System.out.println("I know you owe them money but money doesn't grow on trees your current balance is too low\n" +
@@ -53,9 +57,13 @@ public class Account extends ArrayList<Account> {
            newTransferAmount = Console.getDoubleInput("Please enter the amount :  ");
        }
            setBalance(getBalance() - transferAmount);
-        System.out.println("Your remaining balance is " + getBalance() + ".\n" +
+            System.out.println("Your remaining balance is " + getBalance() + ".\n" +
                 "Which account would you like to deposit this money into?");
+        printHistory.add("Transferred" + transferAmount.toString() + "Balance " + balance.toString() + "\n");
 
+       }
+       public void printHistory() {
+       ArrayList<String> printHistory = new ArrayList<String>();
        }
     }
 
