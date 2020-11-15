@@ -68,34 +68,11 @@ public class Account extends ArrayList<Account> {
         return getBalance();
     }
 
-    public void transfer(Double transferAmount) {
-        Double newTransferAmount = transferAmount;
-        while (transferAmount > getBalance()) {
-            System.out.println("I know you owe them money but money doesn't grow on trees your current balance is too low\n" +
-                    "to transfer that much. You have " + getBalance() + " available try again.");
-            newTransferAmount = Console.getDoubleInput("Please enter the amount :  ");
-        }
-//        setBalance(getBalance() - transferAmount);
-//        System.out.println("Your remaining balance is " + getBalance() + ".\n" +
-//                "Which account would you like to deposit this money into?");
-//        printHistory.add(" Transferred: " + transferAmount.toString() + " Balance: " + balance.toString() + " Account: " + getAccountId());
-    }
-
     public void printHistory() {
         for (String s : printHistory) {
             System.out.println(s);
         }
     }
-
-//    public ArrayList<String> getPrintHistory() {
-//        return printHistory;
-//    }
-//    public void setPrintHistory(ArrayList<String> printHistory) {
-//        this.printHistory = printHistory;
-//    }
-//    public void addToPrintHistory(String history) {
-//        this.printHistory.add(history);
-//    }
 }
 
 
