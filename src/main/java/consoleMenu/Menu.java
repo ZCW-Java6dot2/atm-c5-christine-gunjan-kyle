@@ -135,7 +135,10 @@ public class Menu {
                 break;
             case 7:
                 if (currentAccount.getBalance() > 0.0) {
-                    currentAccount.withdraw(currentAccount.getBalance());
+                    Double moneyAmount = currentAccount.getBalance();
+                    currentAccount.withdraw(moneyAmount);
+                    System.out.println("Successful withdrawal of " + moneyAmount + " from " + currentAccount.getAccountId());
+                    System.out.println(currentAccount.getAccountId() + " successfully emptied and closed.");
                 }
                 currentUser.removeAccount(currentAccount.getAccountId());
                 try {
@@ -213,7 +216,6 @@ public class Menu {
                 this.matchTransactionMethod(1);
                // return "";
             case 5:
-
                 newPin = Console.getIntInput("Please enter the new pin:  ");
                 manager.changePin(currentUser.getUserName(), newPin);
                // return "";
