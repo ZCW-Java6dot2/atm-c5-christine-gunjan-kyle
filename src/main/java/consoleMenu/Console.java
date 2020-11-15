@@ -77,16 +77,19 @@ public class Console {
 
         if(userAvailable) {
             currentUser = userManager.getUser(username);
+            //String nameOfUser = user.getUserNameByAccount(accountIdSelected);
+            //ArrayList<Account> accountsOfUser = accountManager.getAccounts(nameOfUser);
             ArrayList<Account> accountsOfUser= currentUser.getAccounts();
            if(accountsOfUser.size() != 3) {
                //Will go through loop to see how it filters the account type
            } else {
-               accountTypeSelected = menu.userOptionsMenu(new User());
+               Account accountSelected = new Account();
+               accountTypeSelected = menu.userOptionsMenu(currentUser);
              for(int i=0;i<accountsOfUser.size();i++) {
                    if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
-                     accountIdToPass=accountsOfUser.get(i).getAccountId();
+                     accountSelected=accountsOfUser.get(i);
                 }
-               menu.accountMenu(accountIdToPass);
+               menu.accountMenu(accountSelected);
            }
         } else {
             System.out.println("Incorrect selection. Try again.");

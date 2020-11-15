@@ -17,7 +17,14 @@ public class UserManager {
         userPassword.put("CHRISTINE",7784);
         userPassword.put("KYLE",9945);
         users = new ArrayList<User>();
-
+        Account account1 = new Account("CH-gunjan001", 5000d, "CHECKING");
+        Account account2 = new Account("SA-gunjan002", 1500d, "SAVINGS");
+        Account account3 = new Account("IN-gunjan003", 150000d, "INVESTMENT");
+        ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
+        gunjansAccounts.add(account1);
+        gunjansAccounts.add(account2);
+        gunjansAccounts.add(account3);
+        users.add(new User("GUNJAN", gunjansAccounts));
     }
 
     public UserManager(HashMap<String, Integer> userPassword) {
@@ -28,14 +35,13 @@ public class UserManager {
         return userPassword.containsKey(name);
     }
 
-    public User getUser(String name){
-        User current = new User();
-        for (int i=0; i<users.size(); i++){
-            if (users.get(i).getUserName().equals(name)){
-                current = users.get(i);
+    public User getUser(String name) {
+        for (User user : users) {
+            if (name.equalsIgnoreCase(user.getUserName())) {
+                return user;
             }
         }
-        return current;
+        return null;
     }
 
     public Boolean login(String userName , Integer passCode) {

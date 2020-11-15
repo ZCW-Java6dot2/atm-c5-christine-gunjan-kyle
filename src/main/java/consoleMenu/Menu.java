@@ -1,6 +1,7 @@
 package consoleMenu;
 
 
+import account.Account;
 import account.AccountManager;
 import user.UserManager;
 import consoleMenu.Console;
@@ -11,14 +12,16 @@ public class Menu {
     private int choice;
     private String accountId = "";
     User currentUser;
+    Account currentAccount;
 
     public Menu(UserManager manager, AccountManager accountManager){
         this.manager = manager;
         this.accountManager = accountManager;
     }
 
-    public void accountMenu(String accountId)
+    public void accountMenu(Account account)
     {
+        currentAccount = account;
         int transactionChoice=0;
         this.accountId = accountId;
         System.out.println("****************************");
@@ -39,7 +42,7 @@ public class Menu {
                 //add account method
                 break;
             case 2:
-                accountManager.getBalance(this.accountId);
+                System.out.println(currentAccount.getBalance());
                 break;
             case 3:
                 //withdrawal

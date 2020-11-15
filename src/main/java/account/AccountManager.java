@@ -29,41 +29,5 @@ public class AccountManager {
       accountsReceived = user.getAccountsByUserName(username);
       return accountsReceived;
    }
-
-
-   public void getBalance(String accountIdSelected) {
-      String nameOfUser = currentUser.getUserNameByAccount(accountIdSelected);
-      ArrayList<Account> accountsOfUser = currentUser.getAccounts();
-      for (int i = 0; i < accountsOfUser.size(); i++) {
-         String accountId = accountsOfUser.get(i).getAccountId();
-         Double accountBalance = accountsOfUser.get(i).getBalance();
-         String accountType = accountsOfUser.get(i).getAccountType();
-
-         if (accountIdSelected.substring(0,2).equals(accountType.substring(0,2)))
-         {
-            Checking checking = new Checking(accountId, accountBalance, accountType);
-            System.out.println(checking.getBalance());
-            break;
-
-           // transactionChoice= menu.transactionMenu();
-         }
-         else if (accountIdSelected.substring(0,2).equals(accountType.substring(0,2))) {
-            Savings savings = new Savings(accountId, accountBalance, accountType);
-            System.out.println(savings.getBalance());
-            break;
-
-            //transactionChoice= menu.transactionMenu();
-         }
-         else  if (accountIdSelected.substring(0,2).equals(accountType.substring(0,2))) {
-               Investment investment = new Investment(accountId, accountBalance, accountType);
-               System.out.println(investment.getBalance());
-               break;
-            }
-
-
-         }
-      }
-
-
    }
 

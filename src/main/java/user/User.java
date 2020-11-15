@@ -40,6 +40,19 @@ public class User {
         this.accounts = accounts;
     }
 
+    public void addAccount(String accountId, Double balance,String accountType){
+        this.accounts.add(new Account(accountId, balance, accountType));
+    }
+
+    public void removeAccount(String accountId){
+        for (Account account : accounts){
+            if (account.getAccountId().equalsIgnoreCase(accountId)){
+                this.accounts.remove(account);
+                return;
+            }
+        }
+    }
+
  public String getUserNameByAccount(String accountId)
  {
      for (int i = 0; i < accounts.size() ; i++) {
