@@ -112,11 +112,15 @@ public class Menu {
                         destinationAccount = currentUser.getAccounts().get(i);
                     }
                 }
-                User.transfer(currentAccount, destinationAccount, transferAmount);
                 if (destinationAccount == null){
                     System.out.println("This account doesn't exist.");
                     accountMenu(currentAccount);
                 }
+                if (currentAccount == destinationAccount){
+                    System.out.println("Error: you are transferring into the same account you're withdrawing from.");
+                    accountMenu(currentAccount);
+                }
+                User.transfer(currentAccount, destinationAccount, transferAmount);
                 break;
             case 6:
                 currentAccount.printHistory();

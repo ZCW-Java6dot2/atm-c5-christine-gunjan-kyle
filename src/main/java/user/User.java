@@ -1,5 +1,7 @@
 package user;
 import account.*;
+import consoleMenu.Console;
+
 import java.util.ArrayList;
 
 
@@ -54,8 +56,12 @@ public class User {
     }
 
     public static void transfer(Account currentAccount, Account destinationAccount, Double transferAmount){
-        //safety checks - does current account have enough money? else throw error
-        //current account != dest or throw error
+        Double newTransferAmount = transferAmount;
+        while (newTransferAmount > currentAccount.getBalance()) {
+            System.out.println("I know you owe them money but money doesn't grow on trees your current balance is too low\n" +
+                    "to transfer that much. You have " + currentAccount.getBalance() + " available try again.");
+            newTransferAmount = Console.getDoubleInput("Please enter the amount :  ");
+        }
         currentAccount.withdraw(transferAmount);
         destinationAccount.deposit(transferAmount);
     }
