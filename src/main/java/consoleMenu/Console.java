@@ -71,14 +71,15 @@ public class Console {
 
     public void welcome() throws IOException {
         System.out.println("\n  vVVVv (___) wWWWw         (___)  vVVVv\n" +
-                "  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)\n" +
-                "   ~Y~   \\|    ~Y~   (___)    |/    ~Y~\n" +
-                "   \\|   \\ |/   \\| /  \\~Y~/   \\|    \\ |/\n" +
+                "  (___)  ~$~  (___)  vVVVv   ~$~   (___)\n" +
+                "   ~$~   \\|    ~$~   (___)    |/    ~$~\n" +
+                "   \\|   \\ |/   \\| /  \\~$~/   \\|    \\ |/\n" +
                 "  \\\\|// \\\\|// \\\\|/// \\\\|//  \\\\|// \\\\\\|///\n" +
                 "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("****************************************");
-        System.out.println("*****  Welcome to Gukych Bank ATM  *****");
-        System.out.println("****************************************");
+        System.out.println("***** \u001B[36m Welcome to Gukych Bank ATM\u001B[0m  ***** \u001B[36m ");
+        System.out.println("\u001B[0m****************************************");
+
 
         choice = getIntInput("Press 1 to log in.\nPress 2 to open a new bank account:  ");
         while ((choice != 1) && (choice != 2)) {
@@ -142,7 +143,9 @@ public class Console {
 
         userManager.changePin(username, newPin);
         currentUser = userManager.getUser(username);
+        userManager.printOnFile();
         menu.userOptionsMenu(currentUser);
+
     }
 
 }

@@ -66,6 +66,7 @@ public class Menu {
                     }
 
                 }
+             //   manager.printOnFileUserAccounts();
                 accountMenu(currentAccount);
                 // userOptionsMenu(currentUser);
 
@@ -152,6 +153,7 @@ public class Menu {
                 }
                 break;
             case 8:
+                manager.printOnFileUserAccounts();
                 userOptionsMenu(currentUser);
                 break;
             default:
