@@ -17,6 +17,7 @@ public class Menu {
     private String accountId = "";
     User currentUser;
     Account currentAccount;
+    Console console;
 
     public Menu(UserManager manager, AccountManager accountManager) {
         this.manager = manager;
@@ -69,6 +70,7 @@ public class Menu {
                 break;
             case 2:
                 System.out.println(currentAccount.getBalance());
+                accountMenu(currentAccount);
                 break;
             case 3:
                 Double withdrawAmount = 0.0;
@@ -127,6 +129,7 @@ public class Menu {
         System.out.println("4.  Add new account");
         System.out.println("5.  Change pin");
         System.out.println("6.  Log out of user");
+        System.out.println("7.  Quit ATM");
         choiceOfAccount = Console.getIntInput("Please select from these options:  ");
 
         switch (choiceOfAccount) {
@@ -146,10 +149,15 @@ public class Menu {
                 manager.changePin(currentUser.getUserName(), newPin);
                 return "";
             case 6:
-                //log out method
-                //prompt to log in again or quit atm
+                //print transaction history
+                console = new Console();
+                console.welcome();
                 break;
-
+            case 7:
+                System.out.print("Quiting the calculator, Program Ending");
+                //print transaction history
+                System.exit(0);
+                break;
             default:
                 return ("Invalid entry");
         }
