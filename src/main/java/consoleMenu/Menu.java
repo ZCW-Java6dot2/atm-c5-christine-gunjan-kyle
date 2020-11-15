@@ -37,9 +37,11 @@ public class Menu {
     }
 
     private void matchTransactionMethod(int choice){
+
         switch (choice){
             case 1:
                 //add account method
+
                 break;
             case 2:
                 System.out.println(currentAccount.getBalance());
@@ -75,8 +77,11 @@ public class Menu {
         System.out.println("6.  Change pin");
         System.out.println("7.  Go to previous menu");
         choiceOfAccount = Console.getIntInput("Please select from these options: :  ");
-
+        Double balcanceNewAccount=0d;
+        String accountType = "";
+        Integer accountId = 010;
         switch (choiceOfAccount) {
+
             case 1:
                 return "CHECKING";
             case 2:
@@ -84,14 +89,21 @@ public class Menu {
             case 3:
                 return "INVESTMENT";
             case 4:
+                balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
+                accountType = Console.getStringInput("Enter account type CHECKING/SAVINGS/INVESTMENT:  ");
+                currentUser.setAccounts(new Account(String.valueOf(accountId++),balcanceNewAccount,accountType));
                 return "";
             case 5:
                 return "";
             case 6:
+                newPin = Console.getIntInput("Please enter the new pin : ");
                 manager.changePin(currentUser.getUserName(), newPin);
-                return"";
+                //userOptionsMenu(currentUser);
+                return "";
+                //break;
             default:
                 return("Invalid entry");
         }
+
     }
 }
