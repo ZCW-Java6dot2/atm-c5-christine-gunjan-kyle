@@ -23,15 +23,18 @@ public class UserManager {
         userPassword.put("CHRISTINE",7784);
         userPassword.put("KYLE",9945);*/
         this.loadUserPassCodeData();
-       // System.out.println(userPassword);
-        users = new ArrayList<User>();
+      users = new ArrayList<User>();
         Account account1 = new Account("001", 18000d, "CHECKING");
-        Account account2 = new Account("002", 1500d, "SAVINGS");
-        Account account3 = new Account("003", 55000d, "INVESTMENT");
         ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
         gunjansAccounts.add(account1);
-        gunjansAccounts.add(account2);
-        gunjansAccounts.add(account3);
+        //gunjansAccounts.add(account2);
+      //  gunjansAccounts.add(account3);
+        users.add(new User("GUNJAN", gunjansAccounts));
+        this.loadUserAccountsData();
+
+       // System.out.println(userPassword);
+
+        /*
         Account account4 = new Account("004", 12000d, "CHECKING");
         Account account5 = new Account("005", 45000d, "SAVINGS");
         Account account6 = new Account("006", 80000d, "INVESTMENT");
@@ -47,9 +50,9 @@ public class UserManager {
       //  christinesAccount.add(account8);
        // christinesAccount.add(account9);
 
-        users.add(new User("GUNJAN", gunjansAccounts));
+
         users.add(new User("KYLE",kylesAccount));
-        users.add(new User("CHRISTINE",christinesAccount));
+        users.add(new User("CHRISTINE",christinesAccount));*/
 
     }
 
@@ -99,7 +102,7 @@ public class UserManager {
     public void loadUserPassCodeData(){
         // (1)
 
-        String csvFile = "/Users/christine/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
 
         String line = "";
         String csvSplitBy = ",";
@@ -111,11 +114,11 @@ public class UserManager {
 
             while ((line = br.readLine()) != null) {
            // split line with comma
-                String[] beer = line.split(csvSplitBy);
+                String[] userPassCode = line.split(csvSplitBy);
 
             // (4)
-                String userName = beer[0];
-                Integer passCode = Integer.parseInt(beer[1]);
+                String userName = userPassCode[0];
+                Integer passCode = Integer.parseInt(userPassCode[1]);
             // (5)
                 this.userPassword.put(userName,passCode);
             }
@@ -124,7 +127,7 @@ public class UserManager {
         }
     }
     public void printOnFile() throws IOException {
-        String csvFile = "/Users/christine/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
         FileWriter writer = new FileWriter(csvFile); //(1)
        // CSVUtils.writeLine(writer,new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));  // (2)
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet())
@@ -138,10 +141,11 @@ public class UserManager {
         writer.flush();
         writer.close();
     }
-    public void loadUserAccountsData(){
+public void loadUserAccountsData(){
         // (1)
-        String csvFile = "/Users/christine/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
         String line = "";
+        String lineNext="";
         String csvSplitBy = ",";
 
         ArrayList<User> users;
@@ -150,18 +154,71 @@ public class UserManager {
             // nextId = (int)Integer.parseInt(br.readLine());
 
             while ((line = br.readLine()) != null) {
-                // split line with comma
-                String[] beer = line.split(csvSplitBy);
-
+               // split line with comma
+                String[] userAccounts = line.split(csvSplitBy);
                 // (4)
-                String userName = beer[0];
-                Integer passCode = Integer.parseInt(beer[1]);
-                // (5)
-                this.userPassword.put(userName,passCode);
+                String userName = userAccounts[0];
+                Double accountBalance = Double.parseDouble(userAccounts[2]);
+                String accountID =userAccounts[1];
+                String accountType =userAccounts[3];
+                Boolean userExist =  false;
+
+                for(int i=0 ;i < this.users.size() && this.users !=null ;i++) {
+                    if (this.users.get(i).getUserName().equalsIgnoreCase(userName)) {
+
+                        Account account = new Account(accountID, accountBalance, accountType);
+                        ArrayList<Account> accountReceived = this.users.get(i).getAccounts();
+                        accountReceived.add(account);
+                        this.users.get(i).setAccounts(accountReceived);
+                        userExist = true;
+                    }
+                }
+                  if(!userExist)
+                  {
+                        User user = new User();
+                        user.setUserName(userName);
+                        Account account = new Account(accountID,accountBalance,accountType);
+                        ArrayList<Account> accountNotExist = new ArrayList<Account>();
+                        accountNotExist.add(account);
+                        user.setAccounts(accountNotExist);
+                        this.users.add(user);
+                    }
+
+                }
+
+
+
             }
-        } catch (IOException e) {
+          catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void printOnFileUserAccounts() throws IOException {
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
+        FileWriter writer = new FileWriter(csvFile); //(1)
+
+
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+
+            ArrayList<Account> accountsFound=users.get(i).getAccounts();
+
+            for (int j = 0; j < accountsFound.size(); j++) {
+                ArrayList<String> listuserAccount = new ArrayList<>();
+                listuserAccount.add(user.getUserName());
+                listuserAccount.add(accountsFound.get(j).getAccountId());
+                listuserAccount.add(String.valueOf(accountsFound.get(j).getBalance())+"d");
+                listuserAccount.add(accountsFound.get(j).getAccountType());
+                CSVUtils.writeLine(writer, listuserAccount);
+
+            }
+          //  CSVUtils.writeLine(writer, listuserAccount);  // (4)
+
+        }
+
+        writer.flush();
+        writer.close();
+    }
+
 
 }

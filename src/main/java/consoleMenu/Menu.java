@@ -53,12 +53,12 @@ public class Menu {
         Double balcanceNewAccount = 0d;
         String accountType = "";
         Integer accountId = 010;
-
+        this.currentUser = currentUser;
         switch (choice) {
             case 1:
                 accountId += random.nextInt(998) + 1;
-                balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
                 accountType = Console.getStringInput("Enter account type CHECKING/SAVINGS/INVESTMENT:  ");
+                balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
                 currentUser.addAccount(String.valueOf(accountId), balcanceNewAccount, accountType);
                 ArrayList<Account> modifiedAccounts = currentUser.getAccounts();
                 for (int i = 0; i < modifiedAccounts.size(); i++) {
@@ -67,6 +67,7 @@ public class Menu {
                     }
 
                 }
+                manager.printOnFileUserAccounts();
                 accountMenu(currentAccount);
                 // userOptionsMenu(currentUser);
 
@@ -141,6 +142,7 @@ public class Menu {
                 }
                 break;
             case 8:
+                manager.printOnFileUserAccounts();
                 userOptionsMenu(currentUser);
                 break;
             default:
@@ -228,7 +230,7 @@ public class Menu {
             default:
                 System.out.println("Invalid entry");
         }
-      //  return "";
+
     }
 }
 
