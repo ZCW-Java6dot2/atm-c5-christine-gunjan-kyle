@@ -2,6 +2,7 @@ package consoleMenu;
 
 
 import com.sun.deploy.security.SelectableSecurityManager;
+import user.User;
 import user.UserManager;
 import account.AccountManager;
 import account.Account;
@@ -10,10 +11,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Console {
-    public static Scanner scan = new Scanner(System.in);
+    public static Scanner scan;
     private int choice;
     private String username;
-    private int pin; //should pin be string or int?
+    private int pin;
+    AccountManager accountManager;
+    UserManager userManager;
+    Menu menu;
+    Boolean userAvailable;
+    String accountTypeSelected = "";
+    String accountIdToPass = "";
+    User currentUser;
+
+    public Console(){
+        scan = new Scanner(System.in);
+        userManager = new UserManager();
+        userAvailable = false;
+        menu = new Menu(userManager, accountManager);
+    }
 
     public static String getStringInput(String prompt) {
         System.out.print(prompt);
@@ -22,8 +37,19 @@ public class Console {
     }
 
     public static int getIntInput(String prompt) {
-        System.out.print(prompt);
-        return scan.nextInt();
+        //System.out.print(prompt);
+        //return scan.nextInt();
+        Console console = new Console();
+        Integer userInput = 0;
+        System.out.println(prompt);
+        if (scan.hasNextInt()) {
+            userInput = scan.nextInt();
+        } else
+        {
+            userInput = console.getIntInput ("Not a Number value, Please re-enter:");
+        }
+        return userInput;
+
     }
 
     public void welcome(){
@@ -44,41 +70,25 @@ public class Console {
     }
 
     public void logInInput(){
-
-        Boolean userAvailable=false;
-        String accountTypeSelected="";
-        UserManager userManager=new UserManager();
-        String accountIdToPass = "";
-       // Account account=new Account();
-        AccountManager accountManager = new AccountManager();
         username = getStringInput("Please enter your username:  ");
         pin = getIntInput("Please enter your pin:  ");
-        //call function from UserMenu and pass these as parameters.
 
         userAvailable= userManager.login(username,pin);
-        if(userAvailable)
-        {
-            //display menu to get account type
-           ArrayList<Account> accountsOfUser= accountManager.getAccounts(username);
 
-           if(accountsOfUser.size() != 3)
-           {
+        if(userAvailable) {
+            currentUser = userManager.getUser(username);
+            ArrayList<Account> accountsOfUser= currentUser.getAccounts();
+           if(accountsOfUser.size() != 3) {
                //Will go through loop to see how it filters the account type
-           }
-           else
-           {
-               accountTypeSelected= displayAllTypes();
-             for(int i=0;i<accountsOfUser.size();i++)
-               {
+           } else {
+               accountTypeSelected = menu.userOptionsMenu(new User());
+             for(int i=0;i<accountsOfUser.size();i++) {
                    if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
                      accountIdToPass=accountsOfUser.get(i).getAccountId();
                 }
-               accountManager.menuForTransactions(accountIdToPass);
-
+               menu.accountMenu(accountIdToPass);
            }
-        }
-        else
-        {
+        } else {
             System.out.println("Incorrect selection. Try again.");
             welcome();
         }
@@ -86,31 +96,15 @@ public class Console {
 
     public void newBankUser(){
         username = getStringInput("Please enter your preferred username:  ");
-        while (username.equals("already existing username")){
-            //^^must compare username to list of usernames in UserManager
+        Boolean userTaken = userManager.doesUserExist(username);
+        while (userTaken){
             System.out.println("Apologies - this username is taken. Pick another.  ");
             username = getStringInput("Please enter your preferred username:  ");
+            userTaken = userManager.doesUserExist(username);
         }
-        getStringInput("Your temporary pin is 1234. Press any key to change it.");
-        //call changePin() method in UserManager
-        //then call Main.userMenu() for account editing options
+        getIntInput("Your temporary pin is 1234. To change, enter your new pin.");
+        userManager.changePin(username, 1234);
+        menu.userOptionsMenu(currentUser);
     }
 
-    public String displayAllTypes()
-    {
-        Integer choiceOfAccount=0;
-        System.out.println("**** ACCOUNT TYPES *****  ");
-        System.out.println("1.  Checking");
-        System.out.println("2.  Savings");
-        System.out.println("3.  Investment");
-        choiceOfAccount = getIntInput("Please select from these options: :  ");
-        if(choiceOfAccount.equals(1))
-            return "CHECKING";
-            else if(choiceOfAccount.equals(2))
-                return "SAVINGS";
-            else
-                return "INVESTMENT";
-
-      // return choiceOfAccount;
-    }
 }

@@ -1,22 +1,41 @@
 package user;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import consoleMenu.Console;
+import account.Account;
 import java.util.HashMap;
 import java.util.*;
 public class UserManager {
     //storage for all usernames and pin number
-
+    private static final int defaultPassword = 1234;
     HashMap<String,Integer> userPassword; //= new HashMap<User,Integer>();
+    ArrayList<User> users;
 
     public UserManager() {
         this.userPassword=new HashMap<String, Integer>();
         userPassword.put("GUNJAN",1255);
         userPassword.put("CHRISTINE",7784);
         userPassword.put("KYLE",9945);
+        users = new ArrayList<User>();
+
     }
 
     public UserManager(HashMap<String, Integer> userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public Boolean doesUserExist(String name){
+        return userPassword.containsKey(name);
+    }
+
+    public User getUser(String name){
+        User current = new User();
+        for (int i=0; i<users.size(); i++){
+            if (users.get(i).getUserName().equals(name)){
+                current = users.get(i);
+            }
+        }
+        return current;
     }
 
     public Boolean login(String userName , Integer passCode) {
@@ -32,14 +51,14 @@ public class UserManager {
         return false;
     }
 
-    public void changePin(){
-        int savedPin = 0; //retrieve expected pin from hashmap
-        int pin = Console.getIntInput("Enter your current pin:  ");
-        while (pin != savedPin) {
-            pin = Console.getIntInput("WROOOONG! Try again:  ");
-        }
-        if (pin == savedPin){
-            savedPin = Console.getIntInput("Good job. Enter a new pin:  ");
-        }
+    public void changePin(String name, int pin){
+        this.userPassword.replace(name, pin);
+        System.out.println("Pin successfully changed.");
+    }
+
+    public void createUser(String name){
+        this.userPassword.put(name, defaultPassword);
+
+        this.users.add(new User(name, new ArrayList<Account>()));
     }
 }

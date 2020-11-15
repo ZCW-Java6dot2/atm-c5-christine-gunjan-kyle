@@ -6,6 +6,11 @@ import java.util.List;
 
 public class AccountManager {
 
+   User currentUser;
+
+   public AccountManager(User currentUser){
+      this.currentUser = currentUser;
+   }
 
    public ArrayList<Account> getAccounts(String username) {
       ArrayList<Account> accountsReceived;
@@ -26,13 +31,9 @@ public class AccountManager {
    }
 
 
-   public void menuForTransactions(String accountIdSelected) {
-      Menu menu = new Menu();
-      User user = new User();
-      AccountManager accountManager = new AccountManager();
-      Integer transactionChoice = menu.transactionMenu();
-      String nameOfUser = user.getUserNameByAccount(accountIdSelected);
-      ArrayList<Account> accountsOfUser = accountManager.getAccounts(nameOfUser);
+   public void getBalance(String accountIdSelected) {
+      String nameOfUser = currentUser.getUserNameByAccount(accountIdSelected);
+      ArrayList<Account> accountsOfUser = currentUser.getAccounts();
       for (int i = 0; i < accountsOfUser.size(); i++) {
          String accountId = accountsOfUser.get(i).getAccountId();
          Double accountBalance = accountsOfUser.get(i).getBalance();
