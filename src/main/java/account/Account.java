@@ -75,10 +75,10 @@ public class Account extends ArrayList<Account> {
                     "to transfer that much. You have " + getBalance() + " available try again.");
             newTransferAmount = Console.getDoubleInput("Please enter the amount :  ");
         }
-        setBalance(getBalance() - transferAmount);
-        System.out.println("Your remaining balance is " + getBalance() + ".\n" +
-                "Which account would you like to deposit this money into?");
-        printHistory.add(" Transferred: " + transferAmount.toString() + " Balance: " + balance.toString() + " Account: " + getAccountId());
+//        setBalance(getBalance() - transferAmount);
+//        System.out.println("Your remaining balance is " + getBalance() + ".\n" +
+//                "Which account would you like to deposit this money into?");
+//        printHistory.add(" Transferred: " + transferAmount.toString() + " Balance: " + balance.toString() + " Account: " + getAccountId());
     }
 
     public void printHistory() {
@@ -86,6 +86,16 @@ public class Account extends ArrayList<Account> {
             System.out.println(s);
         }
     }
+
+//    public ArrayList<String> getPrintHistory() {
+//        return printHistory;
+//    }
+//    public void setPrintHistory(ArrayList<String> printHistory) {
+//        this.printHistory = printHistory;
+//    }
+//    public void addToPrintHistory(String history) {
+//        this.printHistory.add(history);
+//    }
 }
 
 
