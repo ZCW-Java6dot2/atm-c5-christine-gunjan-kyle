@@ -144,7 +144,6 @@ public class Menu {
                 this.matchTransactionMethod(1);
                 return "";
             case 5:
-
                 newPin = Console.getIntInput("Please enter the new pin:  ");
                 manager.changePin(currentUser.getUserName(), newPin);
                 return "";
