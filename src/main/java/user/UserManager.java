@@ -98,7 +98,9 @@ public class UserManager {
 
     public void loadUserPassCodeData(){
         // (1)
-        String csvFile = "/Users/kyle/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+
         String line = "";
         String csvSplitBy = ",";
 
@@ -121,7 +123,45 @@ public class UserManager {
             e.printStackTrace();
         }
     }
+    public void printOnFile() throws IOException {
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userPass.csv";
+        FileWriter writer = new FileWriter(csvFile); //(1)
+       // CSVUtils.writeLine(writer,new ArrayList<String>(Arrays.asList(String.valueOf(nextId))));  // (2)
+        for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet())
+        {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(String.valueOf(keyValue.getKey()));
+            list.add(String.valueOf(keyValue.getValue()));
+            CSVUtils.writeLine(writer, list);  // (4)
+        }
+       // (5)
+        writer.flush();
+        writer.close();
+    }
+    public void loadUserAccountsData(){
+        // (1)
+        String csvFile = "/Users/gunjan/Dev/atm-c5-christine-gunjan-kyle/userAccounts.csv";
+        String line = "";
+        String csvSplitBy = ",";
 
+        ArrayList<User> users;
+        // (2)
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            // nextId = (int)Integer.parseInt(br.readLine());
 
+            while ((line = br.readLine()) != null) {
+                // split line with comma
+                String[] beer = line.split(csvSplitBy);
+
+                // (4)
+                String userName = beer[0];
+                Integer passCode = Integer.parseInt(beer[1]);
+                // (5)
+                this.userPassword.put(userName,passCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
