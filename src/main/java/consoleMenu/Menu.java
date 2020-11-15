@@ -90,15 +90,24 @@ public class Menu {
                 transferAmount = Console.getDoubleInput("Please enter the amount : ");
                 currentAccount.withdraw(transferAmount);
                 // this needs to be a new menu just with their current accounts.
-//                switch (currentAccount) {
 //                    Integer choiceOfAccount = 0;
+//                System.out.println("1.  Checking");
+//                System.out.println("2.  Savings");
+//                System.out.println("3.  Investment");
+//                choiceOfAccount = Console.getIntInput("Please select from these options:  ");
+//                switch (currentAccount) {
 //                    case 1:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                    case 2:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                    case 3:
 //                        return currentAccount.deposit(transferAmount);
+//                        accountMenu(currentAccount);
 //                        break;
+//                      default:
+//                        return ("Invalid entry");
                 break;
             case 6:
                 if (currentAccount.getBalance() > 0.0) {
