@@ -40,12 +40,12 @@ public class UserManager {
         kylesAccount.add(account5);
         kylesAccount.add(account6);
         Account account7 = new Account("007", 2000d, "CHECKING");
-        Account account8 = new Account("008", 3300d, "SAVINGS");
-        Account account9 = new Account("009", 50000d, "INVESTMENT");
+      //  Account account8 = new Account("008", 3300d, "SAVINGS");
+       // Account account9 = new Account("009", 50000d, "INVESTMENT");
         ArrayList<Account> christinesAccount = new ArrayList<Account>();
         christinesAccount.add(account7);
-        christinesAccount.add(account8);
-        christinesAccount.add(account9);
+      //  christinesAccount.add(account8);
+       // christinesAccount.add(account9);
 
         users.add(new User("GUNJAN", gunjansAccounts));
         users.add(new User("KYLE",kylesAccount));
@@ -72,7 +72,7 @@ public class UserManager {
 
     public Boolean login(String userName , Integer passCode) {
         //matches username/pin at login(called from Console)
-        //if match, redirects to Menu.userMenu
+        //if match, returns true
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet()) {
             String receivedName=keyValue.getKey().toUpperCase();
             Integer receivedPassCode=keyValue.getValue();
@@ -84,11 +84,10 @@ public class UserManager {
     }
 
     public void changePin(String name, int pin){
-      //  System.out.println(name + pin);
          this.createUser(name);
          this.userPassword.replace(name, pin);
-       // System.out.println("after"+name + pin);
-        System.out.println("Pin successfully changed.");
+       //Remember to remove this pin display on UI
+        System.out.println("Pin successfully changed." + name + "\n" + pin);
     }
 
     public void createUser(String name){
