@@ -7,6 +7,7 @@ import user.UserManager;
 import account.AccountManager;
 import account.Account;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,7 +69,7 @@ public class Console {
     }
 
 
-    public void welcome(){
+    public void welcome() throws IOException {
         System.out.println("\n  vVVVv (___) wWWWw         (___)  vVVVv\n" +
                 "  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)\n" +
                 "   ~Y~   \\|    ~Y~   (___)    |/    ~Y~\n" +
@@ -91,37 +92,45 @@ public class Console {
         }
     }
 
-    public void logInInput(){
+    public void logInInput() throws IOException {
         username = getStringInput("Please enter your username:  ");
         pin = getIntInput("Please enter your pin:  ");
 
         userAvailable= userManager.login(username,pin);
+        if(userAvailable) {
+            currentUser = userManager.getUser(username);
+            menu.userOptionsMenu(currentUser);
+        }
+      //  decideOnMenu();
+    }
+
+    public void decideOnMenu() throws IOException {
 
         if(userAvailable) {
             currentUser = userManager.getUser(username);
             ArrayList<Account> accountsOfUser= currentUser.getAccounts();
-           if(accountsOfUser.size()==0) {
+            if(accountsOfUser.size()==0) {
 
-               //Add an account
-           } else {
-               //get all accounts belonging to this user
-               Account accountSelected = new Account();
-               //Display menu for user to select the account types.
-               accountTypeSelected = menu.userOptionsMenu(currentUser);
-             for(int i=0;i<accountsOfUser.size();i++) {
-                   if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
-                     accountSelected=accountsOfUser.get(i);
+                //Add an account
+            } else {
+                //get all accounts belonging to this user
+                Account accountSelected = new Account();
+                //Display menu for user to select the account types.
+             //   accountTypeSelected = menu.userOptionsMenu(currentUser);
+                for(int i=0;i<accountsOfUser.size();i++) {
+                    if(accountsOfUser.get(i).getAccountType().equals(accountTypeSelected))
+                        accountSelected=accountsOfUser.get(i);
                 }
-               //For the selected account , display menu to do transaction
-               menu.accountMenu(accountSelected);
-           }
+                //For the selected account , display menu to do transaction
+                menu.accountMenu(accountSelected);
+            }
         } else {
             System.out.println("Incorrect selection. Try again.");
             welcome();
         }
     }
 
-    public void newBankUser(){
+    public void newBankUser() throws IOException {
         username = getStringInput("Please enter your preferred username:  ");
         Boolean userTaken = userManager.doesUserExist(username);
         while (userTaken){
