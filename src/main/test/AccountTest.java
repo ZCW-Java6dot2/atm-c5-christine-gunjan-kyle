@@ -6,12 +6,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import user.User;
 import user.UserManager;
-
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
-
 import static org.junit.Assert.assertEquals;
-
 
 // Test the expected Account class from ATM.
 public class AccountTest {
@@ -79,6 +76,9 @@ public class AccountTest {
 
     @Test
     public void printTransaction() {
+
+
+
 //        Account a = new Account(0.0);
 //        a.deposit(100.0);
 //        assertEquals(100.0, a.balance(), 0.0001);

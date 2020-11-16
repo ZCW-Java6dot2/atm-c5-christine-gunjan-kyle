@@ -1,0 +1,90 @@
+@startuml
+class Main{
+}
+class Menu {
+accountMenu()
+matchTransactionMethod()
+userOptionsMenu()
+
+
+}
+class Console{
+getStringInput()
+getIntInput()
+getDoubleInput()
+welcome()
+logInInput()
+decideOnMenu()
+newBankUser()
+
+}
+
+class Account {
+   private String accountType
+    private Double balance
+    private String accountId
+    private Double depositAmount
+    private Double withdrawAmount
+    private Double transferAmount
+    private ArrayList<String> printHistory
+    printHistory()
+    withdraw()
+    deposit()
+    setAccountType()
+    getAccountType()
+    setBalance()
+    getBalance()
+    setAccountId()
+    getAccountId()
+
+}
+class Checking {
+}
+class Savings {
+}
+class Investment {
+}
+
+
+Account <|--Checking
+Account <|--Savings
+Account <|--Investment
+class User {
+private String userName
+private ArrayList<Account> accounts
+getUserName()
+setUser()
+getAccounts()
+getAccountsByUserName()
+setAccouns()
+addAccounts()
+removeAccount()
+transfer()
+getUserNameByAccount()
+}
+
+ class UserManager{
+   private static final int defaultPassword
+   HashMap<String,Integer> userPassword
+   ArrayList<User> users
+
+   doesUserExist()
+   login()
+   getUser()
+   changePin()
+   createUser()
+   loadUserPassCodeData()
+   printOnFile()
+   loadUserAccountsData()
+   printOnFileUserAccounts()
+
+ }
+
+Main --> Menu
+Console <--> Menu
+Console <--> Account
+Console <--> User
+Console <--> UserManager
+User <--> UserManager
+Account  <--> User
+@enduml
