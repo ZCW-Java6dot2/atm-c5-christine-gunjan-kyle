@@ -19,40 +19,14 @@ public class UserManager {
 
     public UserManager() {
         this.userPassword=new HashMap<String, Integer>();
-       /* userPassword.put("GUNJAN",1255);
-        userPassword.put("CHRISTINE",7784);
-        userPassword.put("KYLE",9945);*/
         this.loadUserPassCodeData();
-      users = new ArrayList<User>();
+        users = new ArrayList<User>();
         Account account1 = new Account("001", 18000d, "CHECKING");
         ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
         gunjansAccounts.add(account1);
-        //gunjansAccounts.add(account2);
-      //  gunjansAccounts.add(account3);
         users.add(new User("GUNJAN", gunjansAccounts));
         this.loadUserAccountsData();
 
-       // System.out.println(userPassword);
-
-        /*
-        Account account4 = new Account("004", 12000d, "CHECKING");
-        Account account5 = new Account("005", 45000d, "SAVINGS");
-        Account account6 = new Account("006", 80000d, "INVESTMENT");
-        ArrayList<Account> kylesAccount = new ArrayList<Account>();
-        kylesAccount.add(account4);
-        kylesAccount.add(account5);
-        kylesAccount.add(account6);
-        Account account7 = new Account("007", 2000d, "CHECKING");
-      //  Account account8 = new Account("008", 3300d, "SAVINGS");
-       // Account account9 = new Account("009", 50000d, "INVESTMENT");
-        ArrayList<Account> christinesAccount = new ArrayList<Account>();
-        christinesAccount.add(account7);
-      //  christinesAccount.add(account8);
-       // christinesAccount.add(account9);
-
-
-        users.add(new User("KYLE",kylesAccount));
-        users.add(new User("CHRISTINE",christinesAccount));*/
 
     }
 
@@ -133,7 +107,7 @@ public class UserManager {
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet())
         {
             ArrayList<String> list = new ArrayList<>();
-            list.add(String.valueOf(keyValue.getKey()));
+            list.add(String.valueOf(keyValue.getKey()).toUpperCase());
             list.add(String.valueOf(keyValue.getValue()));
             CSVUtils.writeLine(writer, list);  // (4)
         }
@@ -205,14 +179,14 @@ public void loadUserAccountsData(){
 
             for (int j = 0; j < accountsFound.size(); j++) {
                 ArrayList<String> listuserAccount = new ArrayList<>();
-                listuserAccount.add(user.getUserName());
+                listuserAccount.add(user.getUserName().toUpperCase());
                 listuserAccount.add(accountsFound.get(j).getAccountId());
                 listuserAccount.add(String.valueOf(accountsFound.get(j).getBalance())+"d");
                 listuserAccount.add(accountsFound.get(j).getAccountType());
                 CSVUtils.writeLine(writer, listuserAccount);
 
             }
-          //  CSVUtils.writeLine(writer, listuserAccount);  // (4)
+
 
         }
 
