@@ -1,15 +1,10 @@
 
 import account.Account;
-import consoleMenu.Console;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import user.User;
 import user.UserManager;
-import consoleMenu.Menu;
-
+import java.util.ArrayList;
 import java.io.IOException;
-
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertEquals;
@@ -66,6 +61,35 @@ public class AccountTest {
         User actual = manager.getUser("KYLE");
         assertNotNull(actual);
     }
+
+   @Test
+   public void openAccount() throws IOException {
+       User user = new User();
+       user.setUserName("Test123");
+       ArrayList <Account> accounts = new ArrayList<Account>();
+       Account a1 = new Account("008",15000.0d,"CHECKING");
+       accounts.add(a1);
+       user.setAccounts(accounts);
+       Account a2 = new Account("009",450000.0d,"INVESTMENT");
+       accounts.add(a2);
+       user.setAccounts(accounts);
+       assertEquals(2,user.getAccounts().size());
+   }
+
+    @Test
+    public void loginTest() {
+         UserManager manager = new UserManager();
+         assertEquals(true , manager.login("gunjan",1255));
+
+    }
+    @Test
+    public void changePinTest() {
+        UserManager manager = new UserManager();
+        assertEquals(true , manager.login("gunjan",1255));
+        manager.changePin("gunjan",4544);
+        assertEquals(true , manager.login("gunjan",4544));
+
+    }
 /*
  @Test
     public void transferTest() {
@@ -87,38 +111,15 @@ public class AccountTest {
 //        a.deposit(100.0);
 //        assertEquals(100.0, a.balance(), 0.0001);
     }
-*/
- //   @Test
-  //  public void openAccount() throws IOException {
-//        Account a = new Account(10.0);
-     //   Menu menu= new Menu();
-      //  menu.addAccount();
-//        a.deposit(100.0);
-//        assertEquals(110.0, a.balance(), 0.0001);
-  //  }
-/*
-    @Test
-    public void closeAccount() {
+
+       //@Test
+  //  public void closeAccount() {
 //        Account a = new Account(200.0);
 //        Double actual = a.withdraw(100.0);
 //        assertEquals(100.0, actual, 0.0001);
-    }
+  //  }
+
+
 */
-
-    @Test
-    public void loginTest() {
-         UserManager manager = new UserManager();
-         assertEquals(true , manager.login("gunjan",1125));
-
-    }
-    @Test
-    public void changePinTest() {
-        UserManager manager = new UserManager();
-        assertEquals(true , manager.login("gunjan",1125));
-        manager.changePin("gunjan",4544);
-        assertEquals(true , manager.login("gunjan",4544));
-
-    }
-
 
 }

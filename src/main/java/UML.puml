@@ -79,6 +79,11 @@ getUserNameByAccount()
    printOnFileUserAccounts()
 
  }
+class CVSUtils
+{
+writeLine()
+}
+CVSUtils <--> UserManager
 
 Main --> Menu
 Console <--> Menu

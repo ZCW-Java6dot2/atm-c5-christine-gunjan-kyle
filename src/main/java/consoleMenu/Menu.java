@@ -49,10 +49,10 @@ public class Menu {
     }
 
     public void matchTransactionMethod(int choice) throws IOException {
-        Random random = new Random();
-        Double balcanceNewAccount = 0d;
-        String accountType = "";
-        Integer accountId = 010;
+//        Random random = new Random();
+//        Double balcanceNewAccount = 0d;
+//        String accountType = "";
+//        Integer accountId = 010;
         this.currentUser = currentUser;
         switch (choice) {
             case 1:
@@ -63,7 +63,7 @@ public class Menu {
                 break;
             case 2:
                 if (currentAccount.getBalance() != null){
-                    System.out.println(currentAccount.getBalance());
+                    System.out.println("Your current Balance is : " + currentAccount.getBalance());
                 } else {
                     System.out.println("You don't have this account! Go make one, cheapo.");
                 }
@@ -73,7 +73,7 @@ public class Menu {
                 Double withdrawAmount = 0.0;
                 withdrawAmount = Console.getDoubleInput("Please enter the amount :  ");
                 currentAccount.withdraw(withdrawAmount);
-                System.out.println(currentAccount.getBalance());
+               // System.out.println(currentAccount.getBalance());
                 accountMenu(currentAccount);
                 break;
             case 4:

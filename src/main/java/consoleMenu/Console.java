@@ -102,10 +102,14 @@ public class Console {
             currentUser = userManager.getUser(username);
             menu.userOptionsMenu(currentUser);
         }
-      //  decideOnMenu();
+        else {
+            System.out.println("Incorrect selection. Try again.");
+            welcome();
+        }
+
     }
 
-    public void decideOnMenu() throws IOException {
+  /*  public void decideOnMenu() throws IOException {
 
         if(userAvailable) {
             currentUser = userManager.getUser(username);
@@ -129,7 +133,7 @@ public class Console {
             System.out.println("Incorrect selection. Try again.");
             welcome();
         }
-    }
+    }*/
 
     public void newBankUser() throws IOException {
         username = getStringInput("Please enter your preferred username:  ");
