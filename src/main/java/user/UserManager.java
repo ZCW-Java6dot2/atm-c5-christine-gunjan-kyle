@@ -21,10 +21,14 @@ public class UserManager {
         this.userPassword=new HashMap<String, Integer>();
         this.loadUserPassCodeData();
         users = new ArrayList<User>();
-        Account account1 = new Account("001", 18000d, "CHECKING");
-        ArrayList<Account> gunjansAccounts = new ArrayList<Account>();
-        gunjansAccounts.add(account1);
-        users.add(new User("GUNJAN", gunjansAccounts));
+        Account account1 = new Account("001", 18000d, "SAVINGS");
+      //  Account account2 = new Account("002", 55000d, "SAVINGS");
+      //  Account account3 = new Account("003", 650000d, "INVESTMENT");
+        ArrayList<Account> userAccounts = new ArrayList<Account>();
+        userAccounts.add(account1);
+       // userAccounts.add(account2);
+       // userAccounts.add(account3);
+        users.add(new User("DAKSH", userAccounts));
         this.loadUserAccountsData();
 
 
@@ -142,8 +146,10 @@ public void loadUserAccountsData(){
 
                         Account account = new Account(accountID, accountBalance, accountType);
                         ArrayList<Account> accountReceived = this.users.get(i).getAccounts();
-                        accountReceived.add(account);
-                        this.users.get(i).setAccounts(accountReceived);
+                        if(account.getAccountId() != accountID) {
+                            accountReceived.add(account);
+                        }
+                          this.users.get(i).setAccounts(accountReceived);
                         userExist = true;
                     }
                 }

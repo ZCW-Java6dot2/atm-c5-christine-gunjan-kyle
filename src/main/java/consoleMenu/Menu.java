@@ -131,7 +131,7 @@ public class Menu {
                 }
                 break;
             case 8:
-                //manager.printOnFileUserAccounts();
+                manager.printOnFileUserAccounts();
                 userOptionsMenu(currentUser);
                 break;
             default:
@@ -206,7 +206,7 @@ public class Menu {
             case 6:
 
                 //print transaction history
-                manager.printOnFile();
+                // manager.printOnFile();
                 console = new Console();
                 console.welcome();
                 break;
