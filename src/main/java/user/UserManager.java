@@ -133,7 +133,7 @@ public class UserManager {
         for (HashMap.Entry<String, Integer> keyValue : this.userPassword.entrySet())
         {
             ArrayList<String> list = new ArrayList<>();
-            list.add(String.valueOf(keyValue.getKey()));
+            list.add(String.valueOf(keyValue.getKey()).toUpperCase());
             list.add(String.valueOf(keyValue.getValue()));
             CSVUtils.writeLine(writer, list);  // (4)
         }
@@ -205,7 +205,7 @@ public void loadUserAccountsData(){
 
             for (int j = 0; j < accountsFound.size(); j++) {
                 ArrayList<String> listuserAccount = new ArrayList<>();
-                listuserAccount.add(user.getUserName());
+                listuserAccount.add(user.getUserName().toUpperCase());
                 listuserAccount.add(accountsFound.get(j).getAccountId());
                 listuserAccount.add(String.valueOf(accountsFound.get(j).getBalance())+"d");
                 listuserAccount.add(accountsFound.get(j).getAccountType());

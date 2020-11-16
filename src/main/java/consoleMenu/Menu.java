@@ -56,18 +56,7 @@ public class Menu {
         this.currentUser = currentUser;
         switch (choice) {
             case 1:
-                accountId += random.nextInt(998) + 1;
-                accountType = Console.getStringInput("Enter account type CHECKING/SAVINGS/INVESTMENT:  ");
-                balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
-                currentUser.addAccount(String.valueOf(accountId), balcanceNewAccount, accountType);
-                ArrayList<Account> modifiedAccounts = currentUser.getAccounts();
-                for (int i = 0; i < modifiedAccounts.size(); i++) {
-                    if (modifiedAccounts.get(i).getAccountId().equalsIgnoreCase(String.valueOf(accountId))) {
-                        currentAccount = modifiedAccounts.get(i);
-                    }
-
-                }
-                manager.printOnFileUserAccounts();
+                this.addAccount();
                 accountMenu(currentAccount);
                 // userOptionsMenu(currentUser);
 
@@ -142,7 +131,7 @@ public class Menu {
                 }
                 break;
             case 8:
-                manager.printOnFileUserAccounts();
+                //manager.printOnFileUserAccounts();
                 userOptionsMenu(currentUser);
                 break;
             default:
@@ -222,7 +211,7 @@ public class Menu {
                 console.welcome();
                 break;
             case 7:
-                System.out.print("Quiting the calculator, Program Ending");
+                System.out.print("Quiting the ATM, Program Ending");
                 //print transaction history
                 System.exit(0);
 
@@ -231,6 +220,25 @@ public class Menu {
                 System.out.println("Invalid entry");
         }
 
+    }
+
+    public void addAccount() throws IOException {
+        Random random = new Random();
+        Double balcanceNewAccount = 0d;
+        String accountType = "";
+        Integer accountId = 010;
+        accountId += random.nextInt(998) + 1;
+        accountType = Console.getStringInput("Enter account type CHECKING/SAVINGS/INVESTMENT:  ");
+        balcanceNewAccount = Console.getDoubleInput("Please enter the amount :  ");
+        currentUser.addAccount(String.valueOf(accountId), balcanceNewAccount, accountType);
+        ArrayList<Account> modifiedAccounts = currentUser.getAccounts();
+        for (int i = 0; i < modifiedAccounts.size(); i++) {
+            if (modifiedAccounts.get(i).getAccountId().equalsIgnoreCase(String.valueOf(accountId))) {
+                currentAccount = modifiedAccounts.get(i);
+            }
+
+        }
+        manager.printOnFileUserAccounts();
     }
 }
 
